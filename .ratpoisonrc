@@ -1,0 +1,18 @@
+exec /usr/bin/rpws init 5 -k
+exec setxkbmap -option caps:escape
+exec xset s 600
+exec xss-lock slock +resetsaver &
+exec xsetroot -solid black &
+
+bind period exec dmenu_run
+bind c exec xterm -e "tmux"
+bind b exec ratpoison -c "echo $(acpi)"
+
+definekey top XF86AudioRaiseVolume exec amixer -q set Master 5%+
+definekey top XF86AudioLowerVolume exec amixer -q set Master 5%-
+
+definekey top XF86AudioMute exec amixer -q set Master toggle
+definekey top XF86AudioMicMute exec amixer -q set Capture toggle
+
+definekey top XF86MonBrightnessUp exec bright_up
+definekey top XF86MonBrightnessDown exec bright_down
