@@ -1,0 +1,6 @@
+#!/bin/sh
+val=$(cat /sys/class/backlight/intel_backlight/brightness) 
+val=`expr $val - 500`
+if [ $val -gt 0 ]; then
+	echo $val | tee /sys/class/backlight/intel_backlight/brightness
+fi
