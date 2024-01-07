@@ -78,17 +78,20 @@ static const char *brightup[] = {"bright_up", NULL};
 //static const char *voldown[] = {"amixer", "-q", "set", "Master", "5%-", NULL};
 
 //pipewire-alsa
-static const char *volup[] = {"amixer", "-q", "-D", "pipewire", "sset", "Master", "5%+", NULL};
-static const char *voldown[] = {"amixer", "-q", "-D", "pipewire", "sset", "Master", "5%-", NULL};
+//static const char *volup[] = {"amixer", "-q", "-D", "pipewire", "sset", "Master", "5%+", NULL};
+//static const char *voldown[] = {"amixer", "-q", "-D", "pipewire", "sset", "Master", "5%-", NULL};
 
 //pipewire
-//static const char *volup[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK", "+5%", NULL};
-//static const char *voldown[] = {"pactl", "set-sink-volume", "set", "Master", "5%-", NULL};
+static const char *volup[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@", "+5%", NULL};
+static const char *voldown[] = {"pactl", "set-sink-volume", "@DEFAULT_SINK@", "-5%", NULL};
 
-//alsa mute command
-static const char *mute[] = {"amixer", "-q", "set", "Master", "toggle", NULL};
+//alsa mute commands
+//static const char *mute[] = {"amixer", "-q", "set", "Master", "toggle", NULL};
+//static const char *micmute[] = {"amixer", "-q", "set", "Capture", "toggle", NULL};
 
-static const char *micmute[] = {"amixer", "-q", "set", "Capture", "toggle", NULL};
+//pipewire mute commands
+static const char *mute[] = {"pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle", NULL};
+static const char *micmute[] = {"pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL};
 
 static const char *layoutcmd[] = {"layoutcycle", NULL};
 
