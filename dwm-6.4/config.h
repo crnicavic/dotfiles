@@ -3,7 +3,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -61,17 +61,16 @@ static const Layout layouts[] = {
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-//trying out xterm
-static const char *termcmd[] = {"xterm", "-e", "tmux", NULL};
-//static const char *termcmd[]  = { "st", "-e", "tmux", NULL };
+//static const char *termcmd[] = {"xterm", "-e", "tmux", NULL};
+static const char *termcmd[]  = { "st", "-e", "tmux", NULL };
 
 //xbacklight doesnt work on debian
-//static const char *brightdown[] = { "xbacklight", "-dec", brightstep, NULL};
-//static const char *brightup[] = {"xbacklight", "-inc",  brightstep, NULL};
+static const char *brightdown[] = { "xbacklight", "-dec", brightstep, NULL};
+static const char *brightup[] = {"xbacklight", "-inc",  brightstep, NULL};
 
 //so i wrote my own shell scripts
-static const char *brightdown[] = {"bright_down", NULL};
-static const char *brightup[] = {"bright_up", NULL};
+//static const char *brightdown[] = {"bright_down", NULL};
+//static const char *brightup[] = {"bright_up", NULL};
 
 //Commands for alsa
 //static const char *volup[] = {"amixer", "-q", "set", "Master", "5%+", NULL};
@@ -94,6 +93,8 @@ static const char *mute[] = {"pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle
 static const char *micmute[] = {"pactl", "set-source-mute", "@DEFAULT_SOURCE@", "toggle", NULL};
 
 static const char *layoutcmd[] = {"layoutcycle", NULL};
+
+static const char *screenshot[] = {"xfce4-screenshooter", NULL};
 
 static const Key keys[] = {
 	/* modifier                     key				function        argument */
@@ -125,8 +126,9 @@ static const Key keys[] = {
 	{ 0,				XF86XK_MonBrightnessDown,	spawn, 		{.v = brightdown} },
 	{ 0, 				XF86XK_AudioRaiseVolume, 	spawn, 		{.v = volup} },
 	{ 0,				XF86XK_AudioLowerVolume, 	spawn, 		{.v = voldown} },
-	{ 0, 				XF86XK_AudioMute,	 	spawn, 		{.v = mute} },
+	{ 0, 				XF86XK_AudioMute,	 	    spawn, 		{.v = mute} },
 	{ 0,				XF86XK_AudioMicMute,		spawn,		{.v = micmute} },
+    { 0,                XK_Print,                   spawn,      {.v = screenshot} },
 	TAGKEYS(                        XK_1,				0)
 	TAGKEYS(                        XK_2,				1)
 	TAGKEYS(                        XK_3,				2)
