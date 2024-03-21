@@ -27,3 +27,15 @@ but currently can't find them
 # ufw allow Deluge
 # ufw limit ssh
 ```
+
+more a reminder, since i rarely need to use it, but in vim
+a plugin or something will override a default or vimrc option
+for something that is super annoying so to see what is changing it do:
+```vimscript
+set <option> ?
+```
+
+particularly, some vim plugin overrides tabstop for ruby so use
+```vimscript
+:verbose set tabstop sw softtabstop expandtab ?
+```
