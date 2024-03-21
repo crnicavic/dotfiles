@@ -3,7 +3,7 @@ assortment of config files for things i use,
 and various scripts needed to quickly get a system
 ready for use
 
-## some command/settings that don't fit into a file but i need
+## settings/commands i find useful but are a pain to lookup
 
 map capslock to escape on gnome(might work on wayland idk):
 ```bash
@@ -17,4 +17,13 @@ vimplug install
 ```bash
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+```
+
+ufw config - taken from arch wiki - there are some modifications to make
+but currently can't find them
+```bash
+# ufw default deny
+# ufw allow from 192.168.0.0/24
+# ufw allow Deluge
+# ufw limit ssh
 ```
