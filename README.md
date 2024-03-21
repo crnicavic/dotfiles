@@ -1,5 +1,7 @@
 # dotfiles
-some command/settings that don't fit into a file but i need
+assortment of config files for things i use, and various scripts needed to boostrap a system
+
+## some command/settings that don't fit into a file but i need
 
 map capslock to escape on gnome(might work on wayland idk):
 ```bash
