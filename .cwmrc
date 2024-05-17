@@ -1,0 +1,2 @@
+command setxkbmap -option caps:escape
+bind-key CM-Return "xterm -e tmux" 
