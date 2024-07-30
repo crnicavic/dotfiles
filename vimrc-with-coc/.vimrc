@@ -73,6 +73,4 @@ set clipboard=unnamedplus
 
 colorscheme gruvbox
 
-let g:coc_start_at_startup = 0
-
 let g:vimtex_view_method = 'zathura'
