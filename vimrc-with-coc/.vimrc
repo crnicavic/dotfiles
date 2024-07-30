@@ -32,13 +32,8 @@ call plug#begin()
 
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-    Plug 'preservim/nerdtree'
-
     Plug 'lervag/vimtex'
 
-    Plug 'morhetz/gruvbox'
-
-    Plug 'bfrg/vim-cpp-modern'
 call plug#end()
 
 " Make <CR> to accept selected completion item or notify coc.nvim to format

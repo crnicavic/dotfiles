@@ -1,7 +1,0 @@
-#!/bin/sh
-setxkbmap -option caps:escape
-xset s 600
-xss-lock slock +resetsaver &
-xsetroot -solid black &
-dwmblocks &
-dwm

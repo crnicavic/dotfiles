@@ -1,7 +1,0 @@
-#!/bin/sh
-val=$(cat /sys/class/backlight/intel_backlight/brightness)
-max=$(cat /sys/class/backlight/intel_backlight/max_brightness)
-val=`expr $val + 500`
-if [ "$val" -lt "$((max))" ]; then
-	echo $val | tee /sys/class/backlight/intel_backlight/brightness
-fi
