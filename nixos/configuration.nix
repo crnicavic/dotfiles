@@ -21,6 +21,7 @@
 	# Pick only one of the below networking options.
 	# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 	virtualisation.vmware.host.enable = true;
+	virtualisation.docker.enable = true;
 	nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
 		"vmware-workstation"
 	];
@@ -31,17 +32,36 @@
 
 	# Enable the X11 windowing system.
 	services.xserver.enable = true;
+	services.autorandr.enable = true;
 	services.xserver.displayManager.session = [
-	{ 
-		manage = "desktop";
-		name = "dwm";
-		# i honestly dont know why this works
-		start = ''startdwm'';
-	}
+		{ 
+			manage = "desktop";
+			name = "dwm";
+			# i honestly dont know why this works
+			start = ''
+				setxkbmap -option caps:escape
+				xset s 600
+				xss-lock slock +resetsaver &
+				/run/current-system/sw/bin/feh --bg-scale /home/user/.background-image 
+				dwmblocks &
+				dwm
+			'';
+		}
+		{
+			manage = "desktop";
+			name = "cwm";
+			start = ''
+				setxkbmap -option caps:escape
+				xset s 600
+				xss-lock slock +resetsaver &
+				/run/current-system/sw/bin/feh --bg-scale /home/user/.background-image 
+				lemonbar -d -p &
+				while true; do BAT="bat: $(cat /sys/class/power_supply/BAT0/capacity)% |"; DATE=$(date); echo "%{c} %{Sf}$BAT $DATE %{c} %{Sl}$BAT $DATE"; sleep 1; done | lemonbar -p -d &
+
+				cwm
+			'';
+		}
 	];
-
-
-
 	# Configure keymap in X11
 	services.xserver.xkb.layout = "us";
 	services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -63,7 +83,7 @@
 	 # Define a user account. Don't forget to set a password with ‘passwd’.
 	users.users.user = {
 	isNormalUser = true;
-	extraGroups = [ "wheel" "audio" "video"]; # Enable ‘sudo’ for the user.
+	extraGroups = [ "wheel" "audio" "video" "docker" "networkmanager"]; # Enable ‘sudo’ for the user.
 	packages = with pkgs; [
 			firefox
 			tree
@@ -80,6 +100,7 @@
 	security.polkit.enable = true;
 	# List packages installed in system profile. To search, run:
 	# $ nix search wget
+	environment.variables.PATH = [ "/usr/local/bin" ];
 	environment.systemPackages = with pkgs; [
 		vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
 		wget
@@ -94,23 +115,37 @@
 		xorg.xbacklight
 		xss-lock
 		acpi
+		zip
+		unzip
+		xorg.xhost
+		wmname
+		feh
+		cwm
+		lemonbar-xft
 	];
-	systemd = {
-		user.services.polkit-gnome-authentication-agent-1 = {
-			description = "polkit-gnome-authentication-agent-1";
-			wantedBy = [ "graphical-session.target" ];
-			wants = [ "graphical-session.target" ];
-			after = [ "graphical-session.target" ];
-			serviceConfig = {
-			Type = "simple";
-			ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-			Restart = "on-failure";
-			RestartSec = 1;
-			TimeoutStopSec = 10;
-			};
-		};
+	fonts.packages = with pkgs; [
+		hack-font
+	];
 
-	};
+
+	documentation.enable = true;
+	documentation.man.enable = true;
+	documentation.dev.enable = true;
+#	systemd = {
+#		user.services.polkit-gnome-authentication-agent-1 = {
+#			description = "polkit-gnome-authentication-agent-1";
+#			wantedBy = [ "graphical-session.target" ];
+#			wants = [ "graphical-session.target" ];
+#			after = [ "graphical-session.target" ];
+#			serviceConfig = {
+#			Type = "simple";
+#			ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+#			Restart = "on-failure";
+#			RestartSec = 1;
+#			TimeoutStopSec = 10;
+#			};
+#		};
+#	};
 	system.stateVersion = "24.05"; 
 
 }
