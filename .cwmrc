@@ -46,5 +46,5 @@ bind-key 4S-9   window-movetogroup-9
 autogroup 2 "Firefox"
 autogroup 3 "MATLAB R2021a - academic use"
 
-unbind M-Left
-unbind M-Right
+unbind-key M-Left
+unbind-key M-Right
