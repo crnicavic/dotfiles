@@ -20,3 +20,4 @@ set mouse=a					" There must be a reason why I need this
 set clipboard=unnamedplus	" No idea what this does
 set colorcolumn=80			" Ugly af but useful
 set autochdir
+colorscheme gruvbox
