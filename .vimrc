@@ -21,3 +21,4 @@ set clipboard=unnamedplus	" No idea what this does
 set colorcolumn=80			" Ugly af but useful
 set autochdir
 colorscheme gruvbox
+set paste
